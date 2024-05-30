@@ -1,0 +1,214 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Respondent User Profile Basic Information API
+  description: Respondent User Profile Basic Information API
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: API Team
+    email: apiteam@eoc.io
+    url: http://eoc.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://eoc-respondent-basic-info.infra-workers.workers.dev/
+  - url: http://localhost:8787
+paths:
+  /basic-info:
+    get:
+      tags:
+        - RespondentBasicData
+      summary: Returns all RespondentBasicData from the system that the user has access to
+      description: Returns all RespondentBasicData from the system that the user has access to
+      operationId: findRespondentBasicData
+      parameters:
+        - schema:
+            type: number
+            description: Page number
+          required: true
+          description: Page number
+          name: page
+          in: query
+        - schema:
+            type: boolean
+            description: Filter by completed flag
+          required: false
+          description: Filter by completed flag
+          name: isCompleted
+          in: query
+      responses:
+        '200':
+          description: RespondentBasicData response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespondentBasicData'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - RespondentBasicData
+      summary: Creates a new RespondentBasicData in the store.  Duplicates are not allowed
+      description: Creates a new RespondentBasicData in the store.  Duplicates are not allowed
+      operationId: addRespondentBasicData
+      requestBody:
+        description: RespondentBasicData to add to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRespondentBasicData'
+      responses:
+        '200':
+          description: RespondentBasicData response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespondentBasicData'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /basic-info/{id}:
+    get:
+      tags:
+        - RespondentBasicData
+      summary: Returns a RespondentBasicData based on a single ID
+      description: Returns a RespondentBasicData based on a single ID
+      operationId: findRespondentBasicDataById
+      parameters:
+        - name: id
+          in: path
+          description: ID of RespondentBasicData to fetch
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: RespondentBasicData response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespondentBasicData'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - RespondentBasicData
+      summary: Update RespondentBasicData in the store based on a single ID
+      description: Update RespondentBasicData in the store based on a single ID
+      operationId: updateRespondentBasicData
+      parameters:
+        - name: id
+          in: path
+          description: ID of RespondentBasicData to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: RespondentBasicData to add to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRespondentBasicData'
+      responses:
+        '200':
+          description: RespondentBasicData response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespondentBasicData'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - RespondentBasicData
+      summary: deletes a single RespondentBasicData based on the ID supplied
+      description: deletes a single RespondentBasicData based on the ID supplied
+      operationId: deleteRespondentBasicData
+      parameters:
+        - name: id
+          in: path
+          description: ID of RespondentBasicData to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: RespondentBasicData deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+  schemas:
+    RespondentBasicData:
+      allOf:
+        - $ref: '#/components/schemas/NewRespondentBasicData'
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+    NewRespondentBasicData:
+      type: object
+      required:
+        - firstName
+        - lastName
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        country:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        postalCode:
+          type: string
+        gender:
+          type: string
+        agreeOnTerms:
+          type: boolean  
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+security:
+  - bearerAuth: [] 
