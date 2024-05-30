@@ -81,13 +81,5 @@ export class RespondentBasicDataCreate extends OpenAPIRoute {
 
 		  return resBody;
 	}
-
-    getJwt(request: Request) {
-        const authHeader = request.headers.get('Authorization');
-        if (!authHeader || authHeader.substring(0, 6) !== 'Bearer') {
-          return null
-        }
-        return authHeader.substring(6).trim()
-    }
     
 }
