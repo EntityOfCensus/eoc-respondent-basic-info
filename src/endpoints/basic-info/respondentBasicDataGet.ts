@@ -6,6 +6,7 @@ import {
 import { RespondentBasicData } from "../../types";
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
+
 export class RespondentBasicDataGet extends OpenAPIRoute {
 	static schema: OpenAPIRouteSchema = {
 		tags: ["RespondentBasicData"],

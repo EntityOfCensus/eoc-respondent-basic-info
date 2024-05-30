@@ -3,12 +3,9 @@ import {
 	OpenAPIRouteSchema,
 	Path,
 } from "@cloudflare/itty-router-openapi";
-import { RespondentBasicData } from "../../types";
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import updateClaimData from "./updateClaimData";	
-
-const decode = require('jwt-claims');
 
 export class RespondentBasicDataDelete extends OpenAPIRoute {
 	static schema: OpenAPIRouteSchema = {

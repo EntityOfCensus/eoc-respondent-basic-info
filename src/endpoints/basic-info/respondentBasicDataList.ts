@@ -7,8 +7,6 @@ import { RespondentBasicData } from "../../types";
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
-const decode = require('jwt-claims');
-
 export class RespondentBasicDataList extends OpenAPIRoute {
 	static schema: OpenAPIRouteSchema = {
 		tags: ["RespondentBasicData"],

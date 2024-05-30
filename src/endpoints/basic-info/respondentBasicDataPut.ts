@@ -8,8 +8,6 @@ import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import updateClaimData from "./updateClaimData";	
 
-const decode = require('jwt-claims');
-
 export class RespondentBasicDataPut extends OpenAPIRoute {
 	static schema: OpenAPIRouteSchema = {
 		tags: ["RespondentBasicData"],

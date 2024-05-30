@@ -27,16 +27,10 @@ router.post("/api/tasks/", TaskCreate);
 router.get("/api/tasks/:taskSlug/", TaskFetch);
 router.delete("/api/tasks/:taskSlug/", TaskDelete);
 
-
-
 router.get("/basic-info/", secure, RespondentBasicDataList);
-
 router.post("/basic-info/", secure, RespondentBasicDataCreate);
-
 router.get("/basic-info/:id", secure, validatePathId, RespondentBasicDataGet);
-
 router.put("/basic-info/:id", secure, validatePathId, RespondentBasicDataPut);
-
 router.delete("/basic-info/:id", secure, validatePathId, RespondentBasicDataDelete);
 
 router.registry.registerComponent(
