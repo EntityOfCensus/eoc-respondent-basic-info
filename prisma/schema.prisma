@@ -6,11 +6,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  schemas  = ["respondent_basic_info"]
 }
 
 model RespondentBasicData {
@@ -27,6 +29,8 @@ model RespondentBasicData {
   agreeOnTerms Boolean? 
   activeAccount Boolean @default(true)
   ClaimData    ClaimData?
+
+  @@schema("respondent_basic_info")
 }
 
 model ClaimData {
@@ -40,4 +44,6 @@ model ClaimData {
   picture String?
   walletAddress String?
   respondentBasicData   RespondentBasicData @relation(fields: [respondentBasicDataId], references: [id])
+
+  @@schema("respondent_basic_info")
 }
