@@ -10,7 +10,7 @@ import { RespondentBasicDataPut } from "./endpoints/basic-info/respondentBasicDa
 import { RespondentBasicDataDelete } from "./endpoints/basic-info/respondentBasicDataDelete";
 import { createCors } from 'itty-router';
 import secure from './utils/secure';
-import validatePathId from './endpoints/basic-info/validate.paths';
+import validatePathId from './utils/validate.paths';
 export const router = OpenAPIRouter({
 	docs_url: "/",
 });

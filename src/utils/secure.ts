@@ -44,5 +44,4 @@ export default function secure(request: Request, env: any, ctx: any) {
             }
         );       
     }
-    console.log("request claims", request['claims']);
 }
