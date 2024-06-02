@@ -48,7 +48,6 @@ export class RespondentBasicDataCreate extends OpenAPIRoute {
 		  const resBody =  await prisma.respondentBasicData.upsert({
 			where: { id: request.claims.sub },
 			update: {
-			  'id': request.claims.sub,
 			  'firstName': data.body.firstName,
 			  'lastName': data.body.lastName,
 			  'email': data.body.email,
